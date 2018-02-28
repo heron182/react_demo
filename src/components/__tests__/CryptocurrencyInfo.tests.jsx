@@ -28,6 +28,7 @@ it('should render bitcoin info after componentDidMount', (done) => {
     const wrapper = shallow(<CryptocurrencyInfo />)
     // we are testing a state change based on a promisse fullfilment, 
     // hence the done() and setImmediate methods
+    // https://stackoverflow.com/questions/38308214/react-enzyme-test-componentdidmount-async-call/40875174#40875174
     setImmediate(() => {
         expect(wrapper.update().find(ListItem)).toHaveLength(2)
         done();

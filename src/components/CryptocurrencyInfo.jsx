@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { List, ListItem } from "material-ui/List";
 import TextField from 'material-ui/TextField';
-import { cryptocurrency } from '../services/criptocurrency';
+import cryptocurrency from '../services/criptocurrency';
 // import styles from './CryptocurrencyInfo.module.css';
 
 class CryptocurrencyInfo extends Component {

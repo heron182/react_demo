@@ -1,0 +1,10 @@
+.bigMain {
+    border: 2px solid blue;
+    border-bottom-color: aqua;
+}
+
+
+
+.main {
+    composes: bigMain;
+}

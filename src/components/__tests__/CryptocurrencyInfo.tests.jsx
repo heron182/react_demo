@@ -14,18 +14,23 @@ it('renders without crashing', () => {
 });
 
 it('should save user input on component state', () => {
-    const mockInput = {
+    const eventMock = {
         target: { value: 'Bit' }
     }
     const wrapper = shallow(<CryptocurrencyInfo />)
     const searchTxt = wrapper.find(TextField)
-    searchTxt.simulate('change', mockInput)
+    searchTxt.simulate('change', eventMock)
     expect(wrapper.state('searchQuery')).toBe('Bit')
 });
 
 it('should render bitcoin info after componentDidMount', (done) => {
     expect.assertions(1)
-    const wrapper = shallow(<CryptocurrencyInfo />)
+    const muiTheme = getMuiTheme()
+    const wrapper = mount(<CryptocurrencyInfo />,
+        {
+            context: { muiTheme },
+            childContextTypes: { muiTheme: PropTypes.object }
+        })
     // we are testing a state change based on a promisse fullfilment, 
     // hence the done() and setImmediate methods
     // https://stackoverflow.com/questions/38308214/react-enzyme-test-componentdidmount-async-call/40875174#40875174
@@ -53,16 +58,5 @@ it('should filter bitcoin info based on user input', () => {
         />]
     })
     searchTxt.simulate('change', mockInput)
-    expect(wrapper.find(ListItem)).toHaveLength(1)
-});
-
-it('should render bitcoin info after componentDidMount', (done) => {
-    expect.assertions(1)
-    const wrapper = shallow(<CryptocurrencyInfo />)
-    // we are testing a state change based on a promisse fullfilment, 
-    // hence the done() and setImmediate methods
-    setImmediate(() => {
-        expect(wrapper.update().find(ListItem)).toHaveLength(2)
-        done();
-    });
+    expect(wrapper.find(ListItem)).toHaveLength(2)
 });
